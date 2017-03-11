@@ -53,6 +53,13 @@ export default {
 	times() {
 	    let result = [];
 	    for (let cur of this.$store.state.times) {
+		if ((typeof cur.time) === "string") {
+		    cur = Object.assign(
+			Object.create(cur),
+			{time: new Date(cur.time)}
+		    );
+		}
+		
 		let diff = 0, cum = 0;
 		if (cur.id > 0) {
 		    cum = cur.time - result[cur.id-1][0].time;

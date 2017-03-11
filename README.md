@@ -1,6 +1,14 @@
 # time-tracker
 
-> A Vue.js project
+A simple stopwatch app written in Vuejs. It's (somewhat unique)
+feature is that you can attach an arbitrary number of annotations to
+each stopwatch "lap".
+
+We persist all data in localStorage
+
+Built with the new CSS Grid properties, so you have to enable that in
+chrome://flags or the like.
+
 
 ## Build Setup
 
