@@ -21,7 +21,11 @@ new Vue({
 
 	    annotate({times}, {idx, annotation}) {
 		times[idx].annotations.unshift({time: new Date(), text: annotation});
-	    }
+	    },
+
+	    reset(state) {
+		state.times = [];
+	    },
 	}
     })
 })

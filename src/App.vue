@@ -6,13 +6,14 @@
 	    </h1>
 	    <div>
 		<button @click="mark">Go</button>
+		<button @click="reset">Reset</button>
 	    </div>
 	</header>
 	<ol>
 	    <li class=header>
 		<div>Time</div><div>Lap Time</div><div>Cumulative</div>
 	    </li>
-		
+
 	    <li v-for="[time,diff,cum,new_annotation] in times">
 		<div class="time">{{formatTime(time.time)}}</div>
 		<div class="diff"><div class="time">{{formatDiff(diff)[0]}}</div><div class="mills">.{{formatDiff(diff)[1]}}</div></div>
@@ -46,7 +47,17 @@ export default {
     data () {
 	return {
 	    msg: 'Welcome to Your Vue.js App',
+	    curTime: Date.now(),
 	}
+    },
+
+    beforeMount() {
+	// this.$data.curTime = new Date();
+	// console.log('foo');
+	// window.setInterval( () => {
+	//     console.log(this.$data);
+	//     this.$data.curTime = new Date();
+	// }, 100);
     },
 
     computed: {
@@ -73,6 +84,10 @@ export default {
     },
 
     methods: {
+	reset() {
+	    this.$store.commit('reset');
+	},
+	
 	annotate(idx, annotation) {
 	    this.$store.commit('annotate', {idx, annotation});
 	},
@@ -83,7 +98,7 @@ export default {
 	formatTime: function (time) {
 	    return (new Intl.DateTimeFormat('en-US', {
 		year:'numeric', month:'numeric', day:'numeric', hour:'2-digit', minute: '2-digit', second:'2-digit'
-	    })).format(time);
+	    })).format(time.time);
 	},
 
 	formatDiff(diff) {
